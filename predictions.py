@@ -22,3 +22,19 @@ def evaluate_model(model, X_test, y_test):
     print(f"R^2 Score: {r2}")
     return predictions
 
+def plot_predictions(y_test, predictions):
+    plt.figure(figsize=(10, 6))
+    plt.scatter(y_test, predictions, alpha = 0.5)
+    plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--')
+    plt.xlabel('Actual Values')
+    plt.ylabel('Predicted Values')
+    plt.title('Actual vs Predicted Values')
+    plt.show()
+
+if __name__ == "__main__":
+    X_train, X_test, y_train, y_test = load_and_preprocess_data()
+    model = train_model(X_train, y_train)
+    predictions = evaluate_model(model, X_test, y_test)
+    plot_predictions(y_test, predictions)
+
+
