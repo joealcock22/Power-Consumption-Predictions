@@ -6,11 +6,13 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from preprocessing import load_and_preprocess_data
 
+#Training Model on the Dataset 
 def train_model(X_train, y_train):
     model = RandomForestRegressor(n_estimators = 100, random_state = 42)
     model.fit(X_train, y_train)
     return model
 
+#Evaluationn of the Model performance on the test set
 def evaluate_model(model, X_test, y_test):
     predictions = model.predict(X_test)
     mse = mean_squared_error(y_test, predictions)
@@ -22,6 +24,7 @@ def evaluate_model(model, X_test, y_test):
     print(f"R^2 Score: {r2}")
     return predictions
 
+#Visualisation of actual vs predicted values
 def plot_predictions(y_test, predictions):
     plt.figure(figsize=(10, 6))
     plt.scatter(y_test, predictions, alpha = 0.5)
@@ -31,6 +34,7 @@ def plot_predictions(y_test, predictions):
     plt.title('Actual vs Predicted Values')
     plt.show()
 
+#Main Function
 if __name__ == "__main__":
     X_train, X_test, y_train, y_test = load_and_preprocess_data()
     model = train_model(X_train, y_train)
